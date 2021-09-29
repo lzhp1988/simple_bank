@@ -16,5 +16,7 @@ server:
 	go run main.go
 fmt:
 	@go fmt ./...
+mock:
+	mockgen -destination db/mock/store.go -package mockdb github.com/lzhp1988/simplebank/db/sqlc Store
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server fmt
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server fmt mock
