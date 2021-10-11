@@ -66,13 +66,13 @@ func TestCreateUserAPI(t *testing.T) {
 				"email":     user.Email,
 			},
 			buildStubs: func(store *mockdb.MockStore) {
-				// arg := db.CreateUserParams{
-				// 	Username: user.Username,
-				// 	FullName: user.FullName,
-				// 	Email:    user.Email,
-				// }
+				arg := db.CreateUserParams{
+					Username: user.Username,
+					FullName: user.FullName,
+					Email:    user.Email,
+				}
 				store.EXPECT().
-					CreateUser(gomock.Any(), gomock.Any()).
+					CreateUser(gomock.Any(), eqCreateUserParamsMatcher{arg: arg, password: password}).
 					Times(1).
 					Return(user, nil)
 			},
